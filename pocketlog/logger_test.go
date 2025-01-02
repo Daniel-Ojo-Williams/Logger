@@ -19,17 +19,17 @@ func TestLogger_DebugInfoErrof(t *testing.T) {
 	}
 
 	tt := map[string]testCase{
-		"debug": {
+		"debug:": {
 			level:    pocketlog.LevelDebug,
-			expected: "0 " + debugMessage + "\n" + "1 " + inforMessage + "\n" + "2 " + errorMessage + "\n",
+			expected: "DEBUG: " + debugMessage + "\n" + "INFO: " + inforMessage + "\n" + "ERROR: " + errorMessage + "\n",
 		},
-		"info": {
+		"info:": {
 			level:    pocketlog.LevelInfo,
-			expected: "1 " + inforMessage + "\n" + "2 " + errorMessage + "\n",
+			expected: "INFO: " + inforMessage + "\n" + "ERROR: " + errorMessage + "\n",
 		},
 		"error": {
 			level:    pocketlog.LevelError,
-			expected: "2 " + errorMessage + "\n",
+			expected: "ERROR: " + errorMessage + "\n",
 		},
 	}
 
@@ -50,7 +50,7 @@ func TestLogger_DebugInfoErrof(t *testing.T) {
 
 func TestLogger_OutputLength(t *testing.T) {
 	maxLength := uint(11)
-	expected := "0 Why write I...[TRIMMED]\n"
+	expected := "DEBUG: Why write I...[TRIMMED]\n"
 	tw := &testWriter{}
 	logger := pocketlog.New(pocketlog.LevelDebug, pocketlog.WithOutput(tw), pocketlog.WithLength(maxLength))
 	logger.Debugf(debugMessage)
@@ -63,7 +63,7 @@ func TestLogger_OutputLength(t *testing.T) {
 func ExampleLogger_Debugf() {
 	debugLogger := pocketlog.New(pocketlog.LevelDebug)
 	debugLogger.Debugf("Hello, %s", "world")
-	// Output: 0 Hello, world
+	// Output: DEBUG: Hello, world
 }
 
 // testWriter is a struct that implements io.Writer
