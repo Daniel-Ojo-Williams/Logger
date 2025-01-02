@@ -50,7 +50,7 @@ func TestLogger_DebugInfoErrof(t *testing.T) {
 
 func TestLogger_OutputLength(t *testing.T) {
 	maxLength := uint(11)
-	expected := "0 Why write I...  [TRIMMED]\n"
+	expected := "0 Why write I...[TRIMMED]\n"
 	tw := &testWriter{}
 	logger := pocketlog.New(pocketlog.LevelDebug, pocketlog.WithOutput(tw), pocketlog.WithLength(maxLength))
 	logger.Debugf(debugMessage)
