@@ -13,6 +13,11 @@ type Logger struct {
 	maxLength uint
 }
 
+type LogResponse struct {
+	Level   Level  `json:"level"`
+	Message string `json:"message"`
+}
+
 // New returns a logger, ready to log at the required threshold.
 // The default output is Stdout (Stderr for Errorf)
 func New(threshold Level, opts ...Option) *Logger {
@@ -31,7 +36,8 @@ func (l *Logger) logf(lvl Level, format string, args ...any) {
 	} else {
 		msg = string(msgRune)
 	}
-	_, _ = fmt.Fprintf(l.output, "%v %s", lvl, msg)
+
+	_, _ = fmt.Fprintf(l.output, "%v: %s", lvl, msg)
 }
 
 // Debug formats and prints a message if the log leve is debug

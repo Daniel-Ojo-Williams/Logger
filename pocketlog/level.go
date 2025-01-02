@@ -11,3 +11,16 @@ const (
 	// LevelError represents the highest logging level
 	LevelError
 )
+
+func (lvl Level) String() string {
+	switch lvl {
+	case LevelDebug:
+		return "DEBUG"
+	case LevelError:
+		return "ERROR"
+	case LevelInfo:
+		return "INFO"
+	default:
+		return ""
+	}	
+}
