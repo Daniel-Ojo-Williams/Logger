@@ -1,6 +1,7 @@
 package pocketlog_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/daniel-ojo-williams/logger/pocketlog"
@@ -45,6 +46,18 @@ func TestLogger_DebugInfoErrof(t *testing.T) {
 				t.Fatalf("invalid contents, expected %q, got %q", tc.expected, tw.contents)
 			}
 		})
+	}
+}
+
+func TestLogger_OutputLength(t *testing.T) {
+	maxLength := uint(11)
+	expected := "0 Why write I...[TRIMMED]\n"
+	tw := &testWriter{}
+	logger := pocketlog.New(pocketlog.LevelDebug, pocketlog.WithOutput(tw), pocketlog.WithLength(maxLength))
+	logger.Debugf(debugMessage)
+
+	if tw.contents != expected {
+		t.Fatalf("invalid length, expected %s, got %s", expected, tw.contents)
 	}
 }
 
