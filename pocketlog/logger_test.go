@@ -1,7 +1,6 @@
 package pocketlog_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/daniel-ojo-williams/logger/pocketlog"
